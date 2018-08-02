@@ -46,6 +46,7 @@ public class Main {
             int[] ranks = new int[stringCount];
 
             String line;
+            int wordCount = 0;
 
             while ((line = bufferedReader.readLine()) != null) {
                 line = line.toLowerCase();
@@ -55,6 +56,7 @@ public class Main {
 
                 if (notEmpty) {
                     for (String s : split) {
+                        wordCount++;
                         int count = 1;
                         if (!stringHash.containsKey(s)) {
                             stringHash.put(s, count);
@@ -66,7 +68,7 @@ public class Main {
                     }
                 }
             }
-            printResults(topStrings, ranks);
+            printResults(wordCount, topStrings, ranks);
         }
         catch (Exception e){
             e.printStackTrace();
@@ -193,26 +195,33 @@ public class Main {
     /*
      * Prints the most common strings in the document.
      */
-    private static void printResults(String[] topStrings, int[] ranks) {
-        StringBuilder stb = new StringBuilder();
+    private static void printResults(int wordTotal, String[] topStrings, int[] ranks) {
+        StringBuilder total = new StringBuilder("Out of ");
+        total.append(wordTotal);
+        total.append(" total words, the top ");
+        total.append(ranks.length);
+        total.append(" are:");
+
+        StringBuilder mostCommon = new StringBuilder();
 
         for (int i = 0; i < ranks.length; i++){
             if (topStrings[i] == null || topStrings[i].isEmpty()) {
                 i = ranks.length;
             }
             else {
-                stb.append(topStrings[i]);
-                stb.append(" ");
-                stb.append("(");
-                stb.append(ranks[i]);
-                stb.append(")");
+                mostCommon.append(topStrings[i]);
+                mostCommon.append(" ");
+                mostCommon.append("(");
+                mostCommon.append(ranks[i]);
+                mostCommon.append(")");
                 if (i < ranks.length-1 && topStrings[i+1] != null) {
-                    stb.append(", ");
+                    mostCommon.append(", ");
                 }
             }
         }
 
-        System.out.println(stb);
+        System.out.println(total);
+        System.out.println(mostCommon);
     }
 }
 
