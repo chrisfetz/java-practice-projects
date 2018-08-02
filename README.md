@@ -1,15 +1,11 @@
-# Hi! This is where I put my Java practice projects.
-
-## Current projects:
+# Current projects:
 
 ## WordCount 
 A java program that reads a text file and prints out the X most frequent words in alphabetical order. 
 
 ### How to run:
 
-**first argument:** path to text file
-
-**second argument:** number of top words
+java WordCount <path text file> <number>
 
 **example:**
 
