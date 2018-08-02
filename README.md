@@ -16,3 +16,13 @@ java WordCount animals.txt 5
 Out of 22 total words, the top 5 are:
 
 rabbit (5), cat (4), dog (4), fox (3), bear (1) 
+
+**example:**
+
+java WordCount animals.txt 100
+
+**expected output:**
+
+Out of 22 total words, the top 22 are:
+
+rabbit (5), cat (4), dog (4), fox (3), bear (1) 

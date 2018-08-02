@@ -18,6 +18,10 @@ public class WordCount {
         try {
             fileText = args[0];
             count = Integer.parseInt(args[1]);
+            if (count <= 0){
+                System.out.println("Desired word count must be greater than 0.");
+                System.exit(0);
+            }
         } catch(Exception e) {
             System.out.println("Please give a path to the desired file followed by the number of top-ranked words desired.");
             System.exit(0);
@@ -196,16 +200,12 @@ public class WordCount {
      * Prints the most common strings in the document.
      */
     private static void printResults(int wordTotal, String[] topStrings, int[] ranks) {
-        StringBuilder total = new StringBuilder("Out of ");
-        total.append(wordTotal);
-        total.append(" total words, the top ");
-        total.append(ranks.length);
-        total.append(" are:");
-
         StringBuilder mostCommon = new StringBuilder();
+        int cutoff = ranks.length;
 
         for (int i = 0; i < ranks.length; i++){
             if (topStrings[i] == null || topStrings[i].isEmpty()) {
+                cutoff = i;
                 i = ranks.length;
             }
             else {
@@ -219,6 +219,12 @@ public class WordCount {
                 }
             }
         }
+
+        StringBuilder total = new StringBuilder("Out of ");
+        total.append(wordTotal);
+        total.append(" total words, the top ");
+        total.append(cutoff);
+        total.append(" are:");
 
         System.out.println(total);
         System.out.println(mostCommon);
