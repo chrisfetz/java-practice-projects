@@ -81,14 +81,26 @@ public class Main {
                 }
             }
             if (stringAlreadyPresent){
+                System.out.println("Updating " + string);
                 updateExistingWord(indexOfString, count, topStrings, ranks);
+                for (int i : ranks){
+                    System.out.println(i);
+                }
+                for (String s : topStrings){
+                    System.out.println(s);
+                }
             }
             else {
+                boolean add = false;
                 for (int i = last; i > -1; i--){
-                    if (count > ranks[i]){
-                        insertNewWord(i, string, count, topStrings, ranks);
+                    if (count > ranks[i]) {
+                        indexOfString = i;
+                        add = true;
+                    } else if {
+                        
                     }
                 }
+                if (add) insertNewWord(indexOfString, string, count, topStrings, ranks);
             }
         }
     }
@@ -100,25 +112,25 @@ public class Main {
      * array items are pushed forward.
      */
     private static void insertNewWord(int start, String string, int count, String[] topStrings, int[] ranks) {
-        for (int i = start; i > 0; i--){
-            if (ranks[i] == ranks[i-1]){
-                if (topStrings[i-1] != null && topStrings[i].compareTo(topStrings[i-1]) < 0){
-                    swap(i-1, i, topStrings, ranks);
+        if (string != null && string != ""){
+            System.out.println("adding " + string);
+            for (int i = start; i > 0; i--){
+                if (ranks[i] == ranks[i-1]){
+                    if (topStrings[i-1] != null && topStrings[i].compareTo(topStrings[i-1]) < 0){
+                        swap(i-1, i, topStrings, ranks);
+                    }
                 }
             }
-        }
-        for (int i = start; i < ranks.length; i++){
-            int tempInt = ranks[i];
-            String tempString = topStrings[i];
+            for (int i = start; i < ranks.length; i++){
+                int tempInt = ranks[i];
+                String tempString = topStrings[i];
 
-            ranks[i] = count;
-            topStrings[i] = string;
+                ranks[i] = count;
+                topStrings[i] = string;
 
-            count = tempInt;
-            string = tempString;
-            /*
-            if (ranks[i] == ranks[i+1] && topStrings[i].compareTo(topStrings[i+1]-1) swap (i, i+1);
-             */
+                count = tempInt;
+                string = tempString;
+            }
         }
     }
 
