@@ -3,12 +3,12 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.util.HashMap;
+
 /*
  * A wordcount program that analyzes a document and returns the most common words in a document.
  * The amount of words returned is determined by the user.
  * @author Christopher Fetz
  */
-
 public class Main {
 
     public static void main(String[] args) {
@@ -73,7 +73,6 @@ public class Main {
      *
      */
     private static void adjustRanks(String string, int count, String[] topStrings, int[] ranks) {
-
         int last = ranks.length - 1;
         boolean stringAlreadyPresent = false;
         int indexOfString = 0;
@@ -95,10 +94,13 @@ public class Main {
                         indexOfString = i;
                         add = true;
                     } else if (count == ranks[i] && string.compareTo(topStrings[i]) < 0){
-                        add = true; indexOfString = i;
+                        add = true;
+                        indexOfString = i;
                     }
                 }
-                if (add) insertNewWord(indexOfString, string, count, topStrings, ranks);
+                if (add) {
+                    insertNewWord(indexOfString, string, count, topStrings, ranks);
+                }
             }
         }
     }
@@ -139,6 +141,7 @@ public class Main {
     private static void updateExistingWord(int index, int count, String[] topStrings, int[] ranks) {
         ranks[index] = count;
         boolean swapNeeded = true;
+
         while (swapNeeded){
             if ((index > 0 ) && (ranks[index] > ranks[index-1])){
                 swap(index-1, index, topStrings, ranks);
@@ -182,8 +185,8 @@ public class Main {
      * Prints the most common strings in the document.
      */
     private static void printResults(String[] topStrings, int[] ranks) {
-
         StringBuilder stb = new StringBuilder();
+
         for (int i = 0; i < ranks.length; i++){
             if (topStrings[i] == null || topStrings[i].isEmpty()) {
                 i = ranks.length;
@@ -194,14 +197,12 @@ public class Main {
                 stb.append("(");
                 stb.append(ranks[i]);
                 stb.append(")");
-                if (i < ranks.length-1 && topStrings[i+1] != null) stb.append(", ");
+                if (i < ranks.length-1 && topStrings[i+1] != null) {
+                    stb.append(", ");
+                }
             }
         }
 
-        for (int i = ranks.length-1; i == 0; i--){
-            System.out.println(topStrings[i]);
-            System.out.println(i);
-        }
         System.out.println(stb);
     }
 }
