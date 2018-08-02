@@ -81,14 +81,7 @@ public class Main {
                 }
             }
             if (stringAlreadyPresent){
-                System.out.println("Updating " + string);
                 updateExistingWord(indexOfString, count, topStrings, ranks);
-                for (int i : ranks){
-                    System.out.println(i);
-                }
-                for (String s : topStrings){
-                    System.out.println(s);
-                }
             }
             else {
                 boolean add = false;
@@ -96,8 +89,8 @@ public class Main {
                     if (count > ranks[i]) {
                         indexOfString = i;
                         add = true;
-                    } else if {
-                        
+                    } else if (count == ranks[i] && string.compareTo(topStrings[i]) < 0){
+                        add = true; indexOfString = i;
                     }
                 }
                 if (add) insertNewWord(indexOfString, string, count, topStrings, ranks);
@@ -113,7 +106,6 @@ public class Main {
      */
     private static void insertNewWord(int start, String string, int count, String[] topStrings, int[] ranks) {
         if (string != null && string != ""){
-            System.out.println("adding " + string);
             for (int i = start; i > 0; i--){
                 if (ranks[i] == ranks[i-1]){
                     if (topStrings[i-1] != null && topStrings[i].compareTo(topStrings[i-1]) < 0){
