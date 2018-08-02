@@ -41,15 +41,20 @@ public class Main {
             while ((line = bufferedReader.readLine()) != null) {
                 line = line.toLowerCase();
                 String[] split = line.split(" ");
-                for (String s : split) {
-                    int count = 1;
-                    if (!stringHash.containsKey(s)) {
-                        stringHash.put(s, count);
-                    } else {
-                        count = stringHash.get(s) + 1;
-                        stringHash.put(s, count);
+
+                boolean notEmpty = !line.isEmpty() && !line.trim().equals("") && !line.trim().equals("\n");
+
+                if (notEmpty) {
+                    for (String s : split) {
+                        int count = 1;
+                        if (!stringHash.containsKey(s)) {
+                            stringHash.put(s, count);
+                        } else {
+                            count = stringHash.get(s) + 1;
+                            stringHash.put(s, count);
+                        }
+                        adjustRanks(s, count, topStrings, ranks);
                     }
-                    adjustRanks(s, count, topStrings, ranks);
                 }
             }
             printResults(topStrings, ranks);
