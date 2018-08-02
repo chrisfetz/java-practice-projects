@@ -9,7 +9,7 @@ import java.util.HashMap;
  * The amount of words returned is determined by the user.
  * @author Christopher Fetz
  */
-public class Main {
+public class WordCount {
 
     public static void main(String[] args) {
         String fileText = "";
