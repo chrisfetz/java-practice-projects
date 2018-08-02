@@ -13,9 +13,13 @@ java WordCount animals.txt 5
 
 **expected output:**
 
-Out of 22 total words, the top 5 are:
+Total words: 22
 
-rabbit (5), cat (4), dog (4), fox (3), bear (1) 
+Unique words: 10
+
+The 5 most common words are:
+
+rabbit (5), cat (4), dog (4), fox (3), bear (1)
 
 **example:**
 
@@ -23,6 +27,10 @@ java WordCount animals.txt 100
 
 **expected output:**
 
-Out of 22 total words, the top 22 are:
+Total words: 22
 
-rabbit (5), cat (4), dog (4), fox (3), bear (1) 
+Unique words: 10
+
+The 10 most common words are:
+
+rabbit (5), cat (4), dog (4), fox (3), bear (1), lion (1), mongoose (1), ostrich (1), raccoon (1), zebra (1)

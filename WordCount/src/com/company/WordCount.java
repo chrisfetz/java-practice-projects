@@ -72,7 +72,8 @@ public class WordCount {
                     }
                 }
             }
-            printResults(wordCount, topStrings, ranks);
+            int uniqueWords = stringHash.size();
+            printResults(wordCount, uniqueWords, topStrings, ranks);
         }
         catch (Exception e){
             e.printStackTrace();
@@ -199,7 +200,7 @@ public class WordCount {
     /*
      * Prints the most common strings in the document.
      */
-    private static void printResults(int wordTotal, String[] topStrings, int[] ranks) {
+    private static void printResults(int wordTotal, int uniqueWords, String[] topStrings, int[] ranks) {
         StringBuilder mostCommon = new StringBuilder();
         int cutoff = ranks.length;
 
@@ -220,14 +221,19 @@ public class WordCount {
             }
         }
 
-        StringBuilder total = new StringBuilder("Out of ");
+        StringBuilder total = new StringBuilder("Total words: ");
         total.append(wordTotal);
-        total.append(" total words, the top ");
-        total.append(cutoff);
-        total.append(" are:");
+        total.append("\n");
+        total.append("Unique words: ");
+        total.append(uniqueWords);
+
+        StringBuilder fullMostCommon = new StringBuilder("The ");
+        fullMostCommon.append(cutoff);
+        fullMostCommon.append(" most common words are:\n");
+        fullMostCommon.append(mostCommon);
 
         System.out.println(total);
-        System.out.println(mostCommon);
+        System.out.println(fullMostCommon);
     }
 }
 
