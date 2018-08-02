@@ -12,8 +12,17 @@ import java.util.HashMap;
 public class Main {
 
     public static void main(String[] args) {
-        String fileText = args[0];
-        int count = Integer.parseInt(args[1]);
+        String fileText = "";
+        int count = 0;
+
+        try {
+            fileText = args[0];
+            count = Integer.parseInt(args[1]);
+        } catch(Exception e) {
+            System.out.println("Please give a path to the desired file followed by the number of top-ranked words desired.");
+            System.exit(0);
+        }
+
         try {
             File file = new File(fileText);
             wordCount(file, count);
