@@ -2,10 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="cc8f826c-0d55-48e3-ba58-c7c2aeb624e8" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/Java Projects.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/WordCount/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/WordCount/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WordCount/out/production/WordCount/com/company/WordCount.class" beforeDir="false" afterPath="$PROJECT_DIR$/WordCount/out/production/WordCount/com/company/WordCount.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WordCount/src/com/company/WordCount.java" beforeDir="false" afterPath="$PROJECT_DIR$/WordCount/src/com/company/WordCount.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -47,8 +45,8 @@
     <sorting>DEFINITION_ORDER</sorting>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="-8" />
-    <option name="y" value="-13" />
+    <option name="x" value="-1928" />
+    <option name="y" value="-8" />
     <option name="width" value="1936" />
     <option name="height" value="1056" />
   </component>
@@ -66,7 +64,7 @@
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1533254641631" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1533255231285" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/WordCount" />
   </component>
   <component name="RunDashboard">
@@ -103,15 +101,15 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1533249015188</updated>
-      <workItem from="1533249027634" duration="1273000" />
+      <workItem from="1533249027634" duration="1436000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="1273000" />
+    <option name="totallyTimeSpent" value="1436000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
+    <frame x="-1928" y="-8" width="1936" height="1056" extended-state="6" />
     <layout>
       <window_info id="Favorites" side_tool="true" />
       <window_info id="Image Layers" />
