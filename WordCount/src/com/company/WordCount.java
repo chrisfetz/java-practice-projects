@@ -12,6 +12,7 @@ import java.util.HashMap;
 public class WordCount {
 
     public static void main(String[] args) {
+        long startTime = System.nanoTime();
         String fileText = "";
         int count = 0;
 
@@ -33,6 +34,10 @@ public class WordCount {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        long endTime = System.nanoTime();
+        long elapsedTime = (endTime - startTime);
+        double seconds = (double)elapsedTime / 1000000000.0;
+        System.out.println("Task took " + seconds + " seconds.");
     }
 
     /*
@@ -60,15 +65,17 @@ public class WordCount {
 
                 if (notEmpty) {
                     for (String s : split) {
-                        wordCount++;
-                        int count = 1;
-                        if (!stringHash.containsKey(s)) {
-                            stringHash.put(s, count);
-                        } else {
-                            count = stringHash.get(s) + 1;
-                            stringHash.put(s, count);
+                        if (!s.isEmpty()){
+                            wordCount++;
+                            int count = 1;
+                            if (!stringHash.containsKey(s)) {
+                                stringHash.put(s, count);
+                            } else {
+                                count = stringHash.get(s) + 1;
+                                stringHash.put(s, count);
+                            }
+                            adjustRanks(s, count, topStrings, ranks);
                         }
-                        adjustRanks(s, count, topStrings, ranks);
                     }
                 }
             }
@@ -236,7 +243,3 @@ public class WordCount {
         System.out.println(fullMostCommon);
     }
 }
-
-
-
-

@@ -9,28 +9,16 @@ java WordCount <path text file> <number>
 
 **example:**
 
-java WordCount animals.txt 5
+java WordCount big.txt 10
 
 **expected output:**
 
-Total words: 22
+Total words: 1095683
 
-Unique words: 10
-
-The 5 most common words are:
-
-rabbit (5), cat (4), dog (4), fox (3), bear (1)
-
-**example:**
-
-java WordCount animals.txt 100
-
-**expected output:**
-
-Total words: 22
-
-Unique words: 10
+Unique words: 75173
 
 The 10 most common words are:
 
-rabbit (5), cat (4), dog (4), fox (3), bear (1), lion (1), mongoose (1), ostrich (1), raccoon (1), zebra (1)
+the (78162), of (39450), and (37009), to (28295), in (21393), a (20608), that (11483), he (11481), was (11159), his (9961
+
+Task took 0.359889856 seconds.
