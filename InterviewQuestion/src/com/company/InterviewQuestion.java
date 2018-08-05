@@ -63,64 +63,85 @@ public class InterviewQuestion {
     * Matches the substring arrays to the fullString set
      */
     private static void recursiveShell(String fullString, ArrayList<ArrayList<Integer>> goodSubstrings){
-        HashSet<Integer> fullSet = new HashSet<>();
+        char[] fullStringArray = fullString.toCharArray();
 
-        for (int i = 0; i < fullString.length(); i++){
-            fullSet.add(i);
+        for (ArrayList<Integer> list : goodSubstrings){
+            System.out.println("Next list ");
+            for (int i : list){
+                System.out.print(i + " ");
+            }
+            System.out.println();
         }
 
+        System.out.println(goodSubstrings.size());
         for (int i = 0; i < goodSubstrings.size(); i++){
-
-            HashSet<Integer> fullSetCopy = new HashSet<>(fullSet);
-            ArrayList<ArrayList<Integer>> substringsCopy = new ArrayList<>(goodSubstrings);
-
-            check(fullSetCopy, substringsCopy.get(i), i, substringsCopy);
+            System.out.println(i);
+            for (int j = 1; j < goodSubstrings.get(i).size(); j++){
+                System.out.println(j);
+                System.out.println("List " + i + " starting " + j);
+                ArrayList<ArrayList<Integer>> substringsCopy = new ArrayList<>(goodSubstrings);
+                check(fullStringArray, i, j, substringsCopy);
+            }
         }
+        System.out.println("New list");
     }
 
     /*
     * Removes the numbers from fullSet according to the length specified by list.get(0)
      */
-    private static void check(HashSet<Integer> fullSet, ArrayList<Integer> list, int index, ArrayList<ArrayList<Integer>> goodSubstrings) {
-        boolean proceed = true;
-        if (fullSet.isEmpty()){
-            System.out.println("True");
+    private static void check(char[] fullStringArray, int indexOfList, int indexOfStartIndex, ArrayList<ArrayList<Integer>> goodSubstrings) {
+        boolean proceed = false;
+
+        for (char c : fullStringArray){
+            System.out.print(c + " ");
+            if (!(c == ' ')){
+                proceed = true;
+            }
+        }
+        System.out.print("\n");
+
+        if (!proceed){
+            System.out.println("True, string fully matched!");
             System.exit(0);
         }
 
-        if (fullSet.size() >= list.get(0) && list.size() > 1){
-            for (int i = 0; i < list.get(0); i++){
-                if (!fullSet.contains(i+list.get(1))){
-                    proceed = false;
-                }
-            }
-        } else{
+        if (goodSubstrings.isEmpty()){
             proceed = false;
         }
 
-        if (proceed == true){
-            if (goodSubstrings.isEmpty()){
-                System.out.println("False C");
-                System.exit(0);
+        if (proceed){
+            int length = goodSubstrings.get(indexOfList).get(0);
+            int startIndex = goodSubstrings.get(indexOfList).get(indexOfStartIndex);
+            for (int i = startIndex; i < startIndex+length; i++){
+                fullStringArray[i] = ' ';
             }
 
-            for (int i : fullSet){
-               System.out.print(i + " ");
+            goodSubstrings.get(indexOfList).remove(indexOfStartIndex);
+
+            int removeIndex = 0;
+            for (ArrayList<Integer> list : goodSubstrings){
+                for (int i = 1; i < list.size(); i++){
+                    int hitFromTheFront = list.get(i)+list.get(0);
+                    int startInRange = startIndex+length;
+                    if ((list.get(i) < startIndex && hitFromTheFront > startIndex) || list.get(i) >= startIndex && list.get(i) < startInRange){
+                        list.remove(i);
+                        i--;
+                    }
+                }
             }
-            System.out.print("\n");
 
-            for (int i = 0; i < list.get(0); i++){
-                fullSet.remove(i+list.get(1)); //index 1
+            for (int i = 0; i < goodSubstrings.size(); i++){
+                if (goodSubstrings.get(i).size() == 1){
+                    goodSubstrings.remove(i);
+                    i--;
+                }
             }
 
-            list.remove(1); //index 1
-
-            if (list.size() == 1){
-                goodSubstrings.remove(index);
-            }
-
-            for (int i = 0; i < goodSubstrings.size(); i++) {
-                check(fullSet, list, i, goodSubstrings);
+            for (int i = 0; i < goodSubstrings.size(); i++){
+                for (int j = 1; j < goodSubstrings.get(i).size(); j++){
+                    ArrayList<ArrayList<Integer>> substringsCopy = new ArrayList<>(goodSubstrings);
+                    check(fullStringArray, i, j, substringsCopy);
+                }
             }
         }
     }
