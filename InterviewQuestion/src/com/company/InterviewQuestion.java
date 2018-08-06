@@ -10,7 +10,7 @@ public class InterviewQuestion {
     //goodSubstrings = An ArrayList of ArrayLists
     //each arraylist is a length
     public static void main(String[] args) {
-        //long startTime = System.nanoTime();
+        long startTime = System.nanoTime();
 
         int substringCount = args.length-1;
         String fullString = args[0];
@@ -19,8 +19,8 @@ public class InterviewQuestion {
         ArrayList<ArrayList<Integer>> goodSubstrings = new ArrayList<>();
 
         for (int i = 0; i < substringCount; i++){
-            ArrayList<Integer> tempList = new ArrayList<>();
-            HashSet<Character> tempSet = new HashSet<>();
+            ArrayList<Integer> tempList;
+            HashSet<Character> tempSet;
             tempSet = dissolve(args[i+1]);
             if (fullStringSet.containsAll(tempSet)){
                 tempList = match(fullString, args[i+1]);
@@ -33,16 +33,15 @@ public class InterviewQuestion {
 
         if (!substringSuperSet.containsAll(fullStringSet)){
             System.out.println("The given substrings cannot form the string (no search needed.)");
+            printTimeTaken(startTime);
         }
         else {
             char[] fullStringArray = fullString.toCharArray();
-            loop(fullStringArray, goodSubstrings);
+            ArrayList<ArrayList<ArrayList<Integer>>> memo = new ArrayList<>();
+            loop(fullStringArray, goodSubstrings, memo, startTime);
             System.out.println("After searching through the possibilities, the given substrings cannot form the string.");
+            printTimeTaken(startTime);
         }
-//        long endTime = System.nanoTime();
-//        long elapsedTime = (endTime - startTime);
-//        double seconds = (double)elapsedTime / 1000000000.0;
-//        System.out.println("Task took " + seconds + " seconds.");
     }
 
     /*
@@ -59,7 +58,9 @@ public class InterviewQuestion {
     /*
     * Checks whether removing the given substring at startIndex will completely clear fullString.
      */
-    private static void check(char[] fullStringArray, int indexOfList, int indexOfStartIndex, ArrayList<ArrayList<Integer>> goodSubstrings) {
+    private static void check(char[] fullStringArray, int indexOfList, int indexOfStartIndex,
+                              ArrayList<ArrayList<Integer>> goodSubstrings,
+                              ArrayList<ArrayList<ArrayList<Integer>>> memo, long startTime) {
         boolean proceed = false;
 
         for (char c : fullStringArray){
@@ -70,6 +71,7 @@ public class InterviewQuestion {
 
         if (!proceed){
             System.out.println("String can be formed from the substrings!");
+            printTimeTaken(startTime);
             System.exit(0);
         }
 
@@ -103,8 +105,10 @@ public class InterviewQuestion {
                     i--;
                 }
             }
-
-            loop(fullStringArray, goodSubstrings);
+            if (!memo.contains(goodSubstrings)){
+                memo.add(goodSubstrings);
+                loop(fullStringArray, goodSubstrings, memo, startTime);
+            }
         }
     }
 
@@ -112,13 +116,13 @@ public class InterviewQuestion {
     * The central loop that, starting with every valid substring, checks whether FullString array can
     * be constructed by adding a sequence of every other substring.
      */
-    private static void loop(char[] fullStringArray, ArrayList<ArrayList<Integer>> goodSubstrings){
+    private static void loop(char[] fullStringArray, ArrayList<ArrayList<Integer>> goodSubstrings, ArrayList<ArrayList<ArrayList<Integer>>> memo, long startTime){
         int i = 0;
 
         for (ArrayList<Integer> list : goodSubstrings){
             for (int j = 1; j < list.size(); j++){
                 ArrayList<ArrayList<Integer>> substringsCopy = copyList(goodSubstrings);
-                check(fullStringArray, i, j, substringsCopy);
+                check(fullStringArray, i, j, substringsCopy, memo, startTime);
             }
             i++;
         }
@@ -181,5 +185,15 @@ public class InterviewQuestion {
             }
         }
         return matchingPositions;
+    }
+
+    /*
+    * Prints the amount of time the coding task took.
+     */
+    private static void printTimeTaken(long startTime){
+        long endTime = System.nanoTime();
+        long elapsedTime = (endTime - startTime);
+        double seconds = (double)elapsedTime / 1000000000.0;
+        System.out.println("Task took " + seconds + " seconds.");
     }
 }
