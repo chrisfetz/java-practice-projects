@@ -10,7 +10,7 @@ public class InterviewQuestion {
     //goodSubstrings = An ArrayList of ArrayLists
     //each arraylist is a length
     public static void main(String[] args) {
-        long startTime = System.nanoTime();
+        //long startTime = System.nanoTime();
 
         int substringCount = args.length-1;
         String fullString = args[0];
@@ -39,10 +39,10 @@ public class InterviewQuestion {
             loop(fullStringArray, goodSubstrings);
             System.out.println("After searching through the possibilities, the given substrings cannot form the string.");
         }
-        long endTime = System.nanoTime();
-        long elapsedTime = (endTime - startTime);
-        double seconds = (double)elapsedTime / 1000000000.0;
-        System.out.println("Task took " + seconds + " seconds.");
+//        long endTime = System.nanoTime();
+//        long elapsedTime = (endTime - startTime);
+//        double seconds = (double)elapsedTime / 1000000000.0;
+//        System.out.println("Task took " + seconds + " seconds.");
     }
 
     /*
