@@ -10,6 +10,7 @@ public class InterviewQuestion {
     //goodSubstrings = An ArrayList of ArrayLists
     //each arraylist is a length
     public static void main(String[] args) {
+        long startTime = System.nanoTime();
 
         int substringCount = args.length-1;
         String fullString = args[0];
@@ -30,22 +31,18 @@ public class InterviewQuestion {
             }
         }
 
-        //At this stage, the program has a list of strings that are good
-
-
         if (!substringSuperSet.containsAll(fullStringSet)){
-            System.out.println("False A");
-            for (char c : substringSuperSet){
-                System.out.print(c);
-            }
-            System.exit(0);
+            System.out.println("The given substrings cannot form the string (no search needed.)");
         }
         else {
             char[] fullStringArray = fullString.toCharArray();
             loop(fullStringArray, goodSubstrings);
-            System.out.println("False B");
+            System.out.println("After searching through the possibilities, the given substrings cannot form the string.");
         }
-
+        long endTime = System.nanoTime();
+        long elapsedTime = (endTime - startTime);
+        double seconds = (double)elapsedTime / 1000000000.0;
+        System.out.println("Task took " + seconds + " seconds.");
     }
 
     /*
@@ -60,7 +57,7 @@ public class InterviewQuestion {
     }
 
     /*
-    * Removes the numbers from fullSet according to the length specified by list.get(0)
+    * Checks whether removing the given substring at startIndex will completely clear fullString.
      */
     private static void check(char[] fullStringArray, int indexOfList, int indexOfStartIndex, ArrayList<ArrayList<Integer>> goodSubstrings) {
         boolean proceed = false;
@@ -111,6 +108,10 @@ public class InterviewQuestion {
         }
     }
 
+    /*
+    * The central loop that, starting with every valid substring, checks whether FullString array can
+    * be constructed by adding a sequence of every other substring.
+     */
     private static void loop(char[] fullStringArray, ArrayList<ArrayList<Integer>> goodSubstrings){
         int i = 0;
 
@@ -123,6 +124,9 @@ public class InterviewQuestion {
         }
     }
 
+    /*
+    * Deep copies an ArrayList of Integer ArrayLists and returns the result.
+     */
     private static ArrayList<ArrayList<Integer>> copyList (ArrayList<ArrayList<Integer>> listOfLists){
         ArrayList<ArrayList<Integer>> newList = new ArrayList<>();
         for (ArrayList<Integer> list : listOfLists){
