@@ -41,7 +41,8 @@ public class InterviewQuestion {
             System.exit(0);
         }
         else {
-            recursiveShell(fullString, goodSubstrings);
+            char[] fullStringArray = fullString.toCharArray();
+            loop(fullStringArray, goodSubstrings);
             System.out.println("False B");
         }
 
@@ -59,46 +60,16 @@ public class InterviewQuestion {
     }
 
     /*
-    * Recursive matching shell. Transforms fullString into a set of integers from 0 -> string length-1.
-    * Matches the substring arrays to the fullString set
-     */
-    private static void recursiveShell(String fullString, ArrayList<ArrayList<Integer>> goodSubstrings){
-        char[] fullStringArray = fullString.toCharArray();
-
-        for (ArrayList<Integer> list : goodSubstrings){
-            System.out.println("Next list ");
-            for (int i : list){
-                System.out.print(i + " ");
-            }
-            System.out.println();
-        }
-
-        System.out.println(goodSubstrings.size());
-        for (int i = 0; i < goodSubstrings.size(); i++){
-            System.out.println(i);
-            for (int j = 1; j < goodSubstrings.get(i).size(); j++){
-                System.out.println(j);
-                System.out.println("List " + i + " starting " + j);
-                ArrayList<ArrayList<Integer>> substringsCopy = new ArrayList<>(goodSubstrings);
-                check(fullStringArray, i, j, substringsCopy);
-            }
-        }
-        System.out.println("New list");
-    }
-
-    /*
     * Removes the numbers from fullSet according to the length specified by list.get(0)
      */
     private static void check(char[] fullStringArray, int indexOfList, int indexOfStartIndex, ArrayList<ArrayList<Integer>> goodSubstrings) {
         boolean proceed = false;
 
         for (char c : fullStringArray){
-            System.out.print(c + " ");
             if (!(c == ' ')){
                 proceed = true;
             }
         }
-        System.out.print("\n");
 
         if (!proceed){
             System.out.println("True, string fully matched!");
@@ -118,7 +89,6 @@ public class InterviewQuestion {
 
             goodSubstrings.get(indexOfList).remove(indexOfStartIndex);
 
-            int removeIndex = 0;
             for (ArrayList<Integer> list : goodSubstrings){
                 for (int i = 1; i < list.size(); i++){
                     int hitFromTheFront = list.get(i)+list.get(0);
@@ -137,13 +107,32 @@ public class InterviewQuestion {
                 }
             }
 
-            for (int i = 0; i < goodSubstrings.size(); i++){
-                for (int j = 1; j < goodSubstrings.get(i).size(); j++){
-                    ArrayList<ArrayList<Integer>> substringsCopy = new ArrayList<>(goodSubstrings);
-                    check(fullStringArray, i, j, substringsCopy);
-                }
-            }
+            loop(fullStringArray, goodSubstrings);
         }
+    }
+
+    private static void loop(char[] fullStringArray, ArrayList<ArrayList<Integer>> goodSubstrings){
+        int i = 0;
+
+        for (ArrayList<Integer> list : goodSubstrings){
+            for (int j = 1; j < list.size(); j++){
+                ArrayList<ArrayList<Integer>> substringsCopy = copyList(goodSubstrings);
+                check(fullStringArray, i, j, substringsCopy);
+            }
+            i++;
+        }
+    }
+
+    private static ArrayList<ArrayList<Integer>> copyList (ArrayList<ArrayList<Integer>> listOfLists){
+        ArrayList<ArrayList<Integer>> newList = new ArrayList<>();
+        for (ArrayList<Integer> list : listOfLists){
+            ArrayList<Integer> temp = new ArrayList<>();
+            for (int i : list){
+                temp.add(i);
+            }
+            newList.add(temp);
+        }
+        return newList;
     }
 
     /*
