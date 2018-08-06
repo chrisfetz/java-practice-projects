@@ -43,7 +43,7 @@ java InterviewQuestion preposterous p pre prep os oste oster e r p s t ous
 
 **expected output:**
 
-True, string fully matched!
+String can be formed from the substrings!
 
 **example for substrings that are a near match, but can't be put together to form the string:**
 

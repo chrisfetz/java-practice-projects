@@ -69,7 +69,7 @@ public class InterviewQuestion {
         }
 
         if (!proceed){
-            System.out.println("True, string fully matched!");
+            System.out.println("String can be formed from the substrings!");
             System.exit(0);
         }
 
