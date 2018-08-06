@@ -24,7 +24,8 @@ the (78162), of (39450), and (37009), to (28295), in (21393), a (20608), that (1
 Task took 0.359889856 seconds.
 
 ## InterviewQuestion
-An interview question I worked on during a tech interview that totally blew me away! I've figured out how to run the problem with memoization :D
+An interview question I worked on during a tech interview that totally blew me away! 
+I've figured out how to run the problem with memoization. Whew!
 
 ### How to run:
 
