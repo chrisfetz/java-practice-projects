@@ -37,7 +37,7 @@ public class InterviewQuestion {
         }
         else {
             char[] fullStringArray = fullString.toCharArray();
-            ArrayList<ArrayList<ArrayList<Integer>>> memo = new ArrayList<>();
+            HashSet<ArrayList<ArrayList<Integer>>> memo = new HashSet<>();
             loop(fullStringArray, goodSubstrings, memo, startTime);
             System.out.println("After searching through the possibilities, the given substrings cannot form the string.");
             printTimeTaken(startTime);
@@ -60,7 +60,7 @@ public class InterviewQuestion {
      */
     private static void check(char[] fullStringArray, int indexOfList, int indexOfStartIndex,
                               ArrayList<ArrayList<Integer>> goodSubstrings,
-                              ArrayList<ArrayList<ArrayList<Integer>>> memo, long startTime) {
+                              HashSet<ArrayList<ArrayList<Integer>>> memo, long startTime) {
         boolean proceed = false;
 
         for (char c : fullStringArray){
@@ -105,7 +105,7 @@ public class InterviewQuestion {
                     i--;
                 }
             }
-            if (!memo.contains(goodSubstrings)){
+            if (memo.add(goodSubstrings)){
                 memo.add(goodSubstrings);
                 loop(fullStringArray, goodSubstrings, memo, startTime);
             }
@@ -116,7 +116,7 @@ public class InterviewQuestion {
     * The central loop that, starting with every valid substring, checks whether FullString array can
     * be constructed by adding a sequence of every other substring.
      */
-    private static void loop(char[] fullStringArray, ArrayList<ArrayList<Integer>> goodSubstrings, ArrayList<ArrayList<ArrayList<Integer>>> memo, long startTime){
+    private static void loop(char[] fullStringArray, ArrayList<ArrayList<Integer>> goodSubstrings, HashSet<ArrayList<ArrayList<Integer>>> memo, long startTime){
         int i = 0;
 
         for (ArrayList<Integer> list : goodSubstrings){
